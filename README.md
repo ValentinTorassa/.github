@@ -10,3 +10,12 @@ doesn't have its own:
 - [Issue templates](ISSUE_TEMPLATE) and a [pull request template](PULL_REQUEST_TEMPLATE.md).
 
 A repository with its own file keeps using its own.
+
+## Shared workflows
+
+Reusable GitHub Actions workflows, defined once so a runner or action bump is a single change:
+
+- [`security-node.yml`](.github/workflows/security-node.yml): npm audit with a dated allowlist
+  ([`scripts/npm-audit.mjs`](scripts/npm-audit.mjs)) plus CodeQL. Call it from a job with
+  `uses: ValentinTorassa/.github/.github/workflows/security-node.yml@main`; private repositories pass
+  `codeql: false`.
