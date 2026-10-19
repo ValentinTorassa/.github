@@ -6,7 +6,7 @@ name: Security (Node)
 #
 #   jobs:
 #     security:
-#       uses: ValentinTorassa/.github/.github/workflows/security-node.yml@main
+#       uses: ValentinTorassa/.github/.github/workflows/security-node.yml@<commit SHA>
 #       permissions:
 #         contents: read
 #         security-events: write   # only needed when codeql is true
@@ -27,8 +27,13 @@ on:
         type: string
         default: '["."]'
       node-version:
+        description: Node version for npm audit (ignored when node-version-file is set)
         type: string
         default: "22"
+      node-version-file:
+        description: Path to a version file such as .nvmrc, for repositories that pin one
+        type: string
+        default: ""
       codeql:
         description: Run CodeQL (public repositories only)
         type: boolean
@@ -65,7 +70,8 @@ jobs:
 
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
-          node-version: ${{ inputs.node-version }}
+          node-version: ${{ inputs.node-version-file == '' && inputs.node-version || '' }}
+          node-version-file: ${{ inputs.node-version-file }}
           package-manager-cache: false
 
       - name: npm audit
