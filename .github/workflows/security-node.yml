@@ -9,7 +9,12 @@ name: Security (Node)
 #       uses: ValentinTorassa/.github/.github/workflows/security-node.yml@<commit SHA>
 #       permissions:
 #         contents: read
-#         security-events: write   # only needed when codeql is true
+#         security-events: write
+#
+# Grant security-events: write even with codeql: false. GitHub checks the
+# nested jobs' permissions before it evaluates their `if`, and a caller that
+# grants only contents: read gets a startup failure. The npm audit job itself
+# still runs with contents: read.
 #
 # npm audit reads package-lock.json and installs nothing. The allowlist lives in
 # the calling repository, at .github/npm-audit-allowlist.json (see
