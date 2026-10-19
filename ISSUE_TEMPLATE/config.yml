@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Security vulnerability / Vulnerabilidad de seguridad
+    url: https://github.com/ValentinTorassa/.github/blob/main/SECURITY.md
+    about: Report it privately from the repository's Security tab. / Reportala en privado desde la pestaña Security del repo.
