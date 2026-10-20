@@ -47,6 +47,12 @@ on:
         description: JSON list of CodeQL languages
         type: string
         default: '["javascript-typescript", "actions"]'
+      codeql-config-file:
+        description: >-
+          Path in the calling repository to a CodeQL config file (for example
+          to set paths-ignore). Empty means CodeQL's defaults.
+        type: string
+        default: ""
 
 permissions: {}
 
@@ -106,6 +112,7 @@ jobs:
         with:
           languages: ${{ matrix.language }}
           build-mode: none
+          config-file: ${{ inputs.codeql-config-file }}
 
       - uses: github/codeql-action/analyze@24c54180a607b1449ed407dd24f251e4e9147c8d # v4.38.3
         with:
